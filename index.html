@@ -1,303 +1,952 @@
-<!DOCTYPE html>
-<html lang="id">
+<!doctype html>
+<html lang="id" data-theme="auto" data-color="blue">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muhammad Ichsan Fachrezi | Portofolio </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Muhammad Ichsan Fachrezi — Portfolio</title>
+  <meta name="description" content="Muhammad Ichsan Fachrezi — Fresh graduate TI. IT Support & Web Dev (HTML/CSS/JS, PHP, MySQL, Jaringan, IoT).">
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#0B0F14" id="themeColorMeta"/>
+  <!-- OG -->
+  <meta property="og:title" content="Muhammad Ichsan — Portfolio">
+  <meta property="og:description" content="IT Support & Web Dev, Jaringan & IoT.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="image/og-image.jpg">
+  <meta property="og:url" content="https://example.com/">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+
   <style>
-    :root {
-      --bg: #0f172a;        /* latar belakang utama (gelap lembut) */
-      --card: #1e293b;      /* kartu konten */
-      --primary: #0ea5e9;   /* aksen biru elegan */
-      --accent: #38bdf8;    /* aksen tambahan */
-      --text: #e2e8f0;      /* teks utama */
-      --muted: #94a3b8;     /* teks sekunder */
-    }
+/* ================== THEME TOKENS (reworked) ================== */
+:root{
+  /* Default = Dark-ish baseline (Auto akan override via media query) */
+  --bg:#070B10;
+  --bg-soft:#0B1118;
+  --text:#EAF2FD;
+  --muted:#A9B6CC;
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+  --accent:#60A5FA; --accent-2:#2563EB; --accent-3:#7DD3FC;
+  --tint-1:rgba(96,165,250,.22);
+  --tint-2:rgba(14,165,233,.18);
 
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      scroll-behavior: smooth;
-    }
+  --glass:rgba(17,25,40,.55);
+  --brd:rgba(255,255,255,.12);
+  --shadow:0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
 
-    header {
-      text-align: center;
-      padding: 5rem 1rem;
-      background: linear-gradient(145deg, #0f172a, #1e293b);
-      color: var(--text);
-      border-bottom: 2px solid var(--primary);
-    }
+  --r:16px; --r-lg:22px; --container:1200px;
+  --anim-dur:700ms; --anim-ease:cubic-bezier(.2,.8,.2,1);
+}
 
-    header h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
+/* AUTO: ketika OS Light, override token ke versi Light */
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#F7FAFF;
+    --bg-soft:#FFFFFF;
+    --text:#0B0F14;
+    --muted:#4B5565;
 
-    header p {
-      font-size: 1.1rem;
-      color: var(--muted);
-    }
+    --tint-1:rgba(99,102,241,.10);
+    --tint-2:rgba(14,165,233,.10);
 
-    nav {
-      background: #1e293b;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #2d3b4e;
-    }
+    --glass:rgba(255,255,255,.78);
+    --brd:rgba(15,23,42,.12);
+    --shadow:0 10px 30px rgba(15,23,42,.12), inset 0 1px 0 rgba(255,255,255,.85);
+  }
+}
 
-    nav a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
+/* EXPLICIT TOGGLE */
+[data-theme="light"]{
+  --bg:#F7FAFF;
+  --bg-soft:#FFFFFF;
+  --text:#0B0F14;
+  --muted:#4B5565;
+  --tint-1:rgba(99,102,241,.10);
+  --tint-2:rgba(14,165,233,.10);
+  --glass:rgba(255,255,255,.78);
+  --brd:rgba(15,23,42,.12);
+  --shadow:0 10px 30px rgba(15,23,42,.12), inset 0 1px 0 rgba(255,255,255,.85);
+}
+[data-theme="dark"]{
+  --bg:#070B10;
+  --bg-soft:#0B1118;
+  --text:#EAF2FD;
+  --muted:#A9B6CC;
+  --tint-1:rgba(96,165,250,.22);
+  --tint-2:rgba(14,165,233,.18);
+  --glass:rgba(17,25,40,.55);
+  --brd:rgba(255,255,255,.12);
+  --shadow:0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
+}
 
-    nav a:hover {
-      color: var(--accent);
-    }
+/* ACCENT VARIANTS */
+[data-color="blue"]{  --accent:#60A5FA; --accent-2:#2563EB; --accent-3:#7DD3FC; --tint-1:rgba(96,165,250,.22);  --tint-2:rgba(14,165,233,.18); }
+[data-color="purple"]{--accent:#A78BFA; --accent-2:#7C3AED; --accent-3:#C4B5FD; --tint-1:rgba(167,139,250,.22); --tint-2:rgba(124,58,237,.18); }
+[data-color="green"]{ --accent:#34D399; --accent-2:#059669; --accent-3:#6EE7B7; --tint-1:rgba(52,211,153,.22);  --tint-2:rgba(5,150,105,.18); }
+[data-color="orange"]{--accent:#FBBF24; --accent-2:#F59E0B; --accent-3:#FDE68A; --tint-1:rgba(251,191,36,.22);  --tint-2:rgba(245,158,11,.18); }
+[data-color="pink"]{  --accent:#F472B6; --accent-2:#DB2777; --accent-3:#F9A8D4; --tint-1:rgba(244,114,182,.22); --tint-2:rgba(219,39,119,.18); }
 
-    section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 4rem 2rem;
-    }
+/* ========== BASE ========== */
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  padding-top: 30px; /* ruang untuk navbar */
+  margin:0; font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 600px at 12% 10%, var(--tint-1), transparent 60%),
+    radial-gradient(900px 520px at 90% 85%, var(--tint-2), transparent 55%),
+    linear-gradient(180deg,var(--bg) 0%, var(--bg-soft) 100%);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+.container{ width:min(var(--container),100%); margin:0 auto; padding:24px clamp(16px,3vw,28px); }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: var(--primary);
-      font-size: 2rem;
-    }
+/* Skip link */
+.skip-link{ position:absolute; left:-9999px; top:auto; }
+.skip-link:focus{ left:12px; top:12px; z-index:9999; background:#fff; color:#000; padding:8px 12px; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,.25) }
 
-    .about {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
+/* ========== NAVBAR ========== */
+header{
+  position: fixed;          /* dulu: sticky */
+  top: 0; left: 0; right: 0;
+  z-index: 1000;            /* pastikan di atas konten */
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
+  background:linear-gradient(180deg, rgba(5,8,14,.55), rgba(5,8,14,.28));
+  border-bottom:1px solid var(--brd);
+}
 
-    .about img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 3px solid var(--primary);
-      margin-bottom: 1.2rem;
-    }
+/* Hilangkan efek reveal khusus header agar tidak “kedip” */
+header.reveal{ opacity:1 !important; transform:none !important; }
 
-    .about p {
-      max-width: 700px;
-      color: var(--muted);
-      font-size: 1rem;
-    }
+.nav{
+  width:min(var(--container),100%); margin:0 auto; padding:12px clamp(16px,3vw,28px);
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+}
+.brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.02em}
+.brand svg{width:22px; height:22px}
+.nav-detail{ display:flex; gap:2px; flex-wrap:wrap; position:relative }
+.nav-detail a{
+  --pad:12px;
+  display:inline-flex; align-items:center; gap:8px; padding:10px var(--pad);
+  border-radius:12px; font-weight:600; font-size:14px; text-decoration:none; color:var(--text);
+  position:relative; isolation:isolate;
+}
+.nav-detail a::after{
+  content:""; position:absolute; left:10px; right:10px; bottom:6px; height:2px;
+  background:linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform:scaleX(0); transform-origin:center; transition:transform .25s var(--anim-ease);
+}
+.nav-detail a:hover::after{ transform:scaleX(1) }
+.nav-detail a[aria-current="page"]{ color:#0b1020; background:linear-gradient(180deg, var(--accent), var(--accent-2)); }
+.toolbar{ display:flex; align-items:center; gap:10px; }
 
-    .skills {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.5rem;
-    }
+/* Theme toggle */
+.theme-toggle{
+  display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; cursor:pointer;
+  border:1px solid var(--brd); background:rgba(17,25,40,.45); color:var(--text);
+}
 
-    .skill {
-      background: var(--card);
-      padding: 1.5rem;
-      border-radius: 10px;
-      text-align: center;
-      border: 1px solid #2d3b4e;
-      transition: transform 0.3s, border-color 0.3s;
-    }
+/* Light-mode tune: navbar & ghost buttons lebih terang */
+[data-theme="light"] header{ background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.70)); }
+[data-theme="light"] .theme-toggle,
+[data-theme="light"] .dd-btn{ background:rgba(255,255,255,.88); }
 
-    .skill:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
-    }
+/* ===== Accent Color Dropdown ===== */
+.color-dd{ position:relative; }
+.dd-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 12px; border-radius:12px; cursor:pointer;
+  border:1px solid var(--brd); background:rgba(17,25,40,.45); color:var(--text);
+  -webkit-backdrop-filter: blur(10px) saturate(140%); backdrop-filter: blur(10px) saturate(140%);
+  font-weight:600;
+}
+.dd-chip{
+  width:14px; height:14px; border-radius:999px;
+  background:linear-gradient(180deg, var(--accent), var(--accent-2));
+  border:1px solid rgba(255,255,255,.28);
+}
+.dd-caret{ font-size:12px; opacity:.85 }
+.dd-pop{
+  position:absolute; right:0; top:calc(100% + 8px); min-width:200px; z-index:60;
+  border:1px solid var(--brd); border-radius:12px; overflow:hidden;
+  background:rgba(17,25,40,.9);
+  -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%);
+  box-shadow:0 16px 40px rgba(0,0,0,.35);
+  transform-origin: top right; transform: scale(.98) translateY(-4px);
+  opacity:0; pointer-events:none; transition:opacity .12s ease, transform .12s ease;
+}
+.color-dd[aria-expanded="true"] .dd-pop{ opacity:1; transform:scale(1) translateY(0); pointer-events:auto }
+.dd-title{ padding:10px 12px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); border-bottom:1px solid rgba(255,255,255,.08) }
+.dd-opt{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  width:100%; padding:10px 12px; background:transparent; border:0; cursor:pointer; color:var(--text);
+}
+.dd-opt:hover{ background:rgba(255,255,255,.06) }
+.dd-left{ display:flex; align-items:center; gap:10px }
+.dd-dot{ width:14px; height:14px; border-radius:999px; border:1px solid rgba(255,255,255,.28) }
+.dd-name{ font-weight:600; font-size:14px }
+.dd-tag{ font-size:11px; color:var(--muted) }
+.dd-check{ font-size:14px; opacity:.9 }
+.dd-dot.blue{ background:linear-gradient(180deg,#60A5FA,#2563EB) }
+.dd-dot.purple{ background:linear-gradient(180deg,#A78BFA,#7C3AED) }
+.dd-dot.green{ background:linear-gradient(180deg,#34D399,#059669) }
+.dd-dot.orange{ background:linear-gradient(180deg,#FBBF24,#F59E0B) }
+.dd-dot.pink{ background:linear-gradient(180deg,#F472B6,#DB2777) }
+@media (max-width:520px){ .dd-btn{ padding:8px 10px } .dd-pop{ min-width:180px } }
 
-    .skill h3 {
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
+/* ========== HERO ========== */
+.about-full{
+  margin: clamp(18px, 3vw, 28px) auto clamp(98px, 6vw, 64px);
+  position:relative; min-height:clamp(560px, 100svh, 700px);
+  display:grid; place-items:center; padding: clamp(24px, 6vw, 56px);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(700px 380px at 12% 18%, var(--tint-1), transparent 60%),
+    radial-gradient(520px 300px at 88% 78%, var(--tint-2), transparent 55%),
+    linear-gradient(180deg, rgba(17,25,40,.72), rgba(17,25,40,.58));
+  border:1px solid var(--brd); box-shadow: var(--shadow); overflow:hidden;
+}
+[data-theme="light"] .about-full{
+  background:
+    radial-gradient(700px 380px at 12% 18%, var(--tint-1), transparent 60%),
+    radial-gradient(520px 300px at 88% 78%, var(--tint-2), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.66));
+  border:1px solid rgba(15,23,42,.10);
+}
+.about-full::before{
+  content:""; position:absolute; inset:-10%;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:22px 22px,22px 22px;
+  mask-image: radial-gradient(70% 60% at 50% 40%, #000 55%, transparent 70%);
+  pointer-events:none;
+}
+.about-inner{ position:relative; z-index:1; display:grid; gap: clamp(18px, 4vw, 28px); align-items:center;
+  grid-template-columns: 1fr; max-width: 1100px; width:100%; text-align:center; padding-inline: clamp(4px, 1vw, 8px);}
+@media (min-width: 960px){ .about-inner{ grid-template-columns: 320px 1fr; text-align:left; } }
 
-    .skill p {
-      color: var(--muted);
-    }
+.avatar-wrap{ position:relative; width:260px; height:320px; margin-inline:auto }
+.avatar-aura{
+  position:absolute; inset:-18px; border-radius:26px;
+  background:conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+  filter:blur(28px); opacity:.55; animation:aura 10s linear infinite;
+}
+@keyframes aura{ to{ transform:rotate(360deg) } }
+.avatar-frame{
+  position:relative; width:100%; height:100%; border-radius:22px; overflow:hidden;
+  background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.20);
+  box-shadow:0 22px 46px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.08);
+  -webkit-backdrop-filter:blur(12px) saturate(150%); backdrop-filter:blur(12px) saturate(150%);
+  transition:transform .45s ease, box-shadow .45s ease, filter .3s ease;
+}
+.avatar-frame:hover{ transform:translateY(-6px) scale(1.02); box-shadow:0 30px 70px rgba(59,130,246,.40) }
+.avatar-frame::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  border-radius:22px; padding:2px; background:linear-gradient(90deg,rgba(255,255,255,.12),transparent 30%,rgba(255,255,255,.12) 70%,transparent);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.avatar-frame img{ width:100%; height:100%; object-fit:cover; filter:brightness(1.05) contrast(1.05) }
 
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
+.about-copy h1{ margin:0 0 10px; font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted) }
+.lead{ font-size: clamp(26px, 4.5vw, 44px); font-weight:600; line-height:1.2; color:var(--muted) }
+.name{
+  display:inline-block; font-size:clamp(38px, 6.2vw, 66px); font-weight:900; line-height:1.05;
+  background:conic-gradient(from 0deg, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-size:200% 200%; animation:titleShift 8s linear infinite;
+}
+@keyframes titleShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.about-divider{ height:1px; width:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent); margin: clamp(14px, 2.6vw, 18px) 0; }
+.badges{ display:flex; flex-wrap:wrap; gap:8px; margin: 6px 0 0; justify-content:center }
+@media (min-width:960px){ .badges{justify-content:flex-start} }
+.pill{ font-size:12px; padding:6px 10px; border:1px solid var(--brd); border-radius:999px; background:rgba(17,25,40,.45) }
+.cta{ display:flex; flex-wrap:wrap; gap:10px; margin-top: clamp(20px, 3vw, 26px); justify-content:center }
+@media (min-width: 960px){ .cta{ justify-content:flex-start } }
+.btn,.btn-ghost{
+  display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:700; font-size:14px; text-decoration:none; cursor:pointer;
+  border:1px solid var(--brd); transition:transform .15s ease, filter .15s ease, box-shadow .2s ease;
+}
+.btn{ background:linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%); color:#0b1020; box-shadow:0 6px 18px rgba(96,165,250,.28) }
+.btn-ghost{ background:rgba(17,25,40,.45); color:var(--text) }
+.btn:hover{ filter:brightness(1.06) } .btn:active{ transform:translateY(1px) }
+:focus-visible{ outline:2px solid var(--accent); outline-offset:2px }
 
-    .project {
-      background: var(--card);
-      border-radius: 10px;
-      padding: 1.5rem;
-      border: 1px solid #2d3b4e;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+.scroll-cue{ position:absolute; left:50%; bottom:14px; transform:translateX(-50%); font-size:12px; color:var(--muted); display:flex; align-items:center; gap:8px; opacity:.85 }
+.scroll-cue svg{ width:14px; height:14px }
 
-    .project:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-      border-color: var(--primary);
-    }
+/* ========== REVEAL ========== */
+.reveal{ opacity:0; transform:translateY(16px); transition: opacity var(--anim-dur) var(--anim-ease), transform var(--anim-dur) var(--anim-ease); will-change: opacity, transform; }
+.reveal.show{ opacity:1; transform:translateY(0) }
+.reveal-stagger > *{ opacity:0; transform:translateY(14px) }
+.reveal-stagger.show > *{ opacity:1; transform:translateY(0); transition: opacity var(--anim-dur) var(--anim-ease), transform var(--anim-dur) var(--anim-ease) }
+.reveal-stagger.show > *:nth-child(1){ transition-delay: 60ms } .reveal-stagger.show > *:nth-child(2){ transition-delay: 120ms }
+.reveal-stagger.show > *:nth-child(3){ transition-delay: 180ms } .reveal-stagger.show > *:nth-child(4){ transition-delay: 240ms } .reveal-stagger.show > *:nth-child(5){ transition-delay: 300ms }
+@media (prefers-reduced-motion: reduce){ .reveal, .reveal-stagger > *{ transition: none; opacity:1; transform:none } }
 
-    .project h3 {
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
+/* ========== SECTION WRAPPER ========== */
+.section{
+  margin-top: clamp(56px, 7vw, 90px);
+  border:1px solid var(--brd); border-radius:var(--r-lg);
+  background:rgba(17,25,40,.6); box-shadow:var(--shadow);
+  padding: clamp(24px, 5vw, 44px); -webkit-backdrop-filter:blur(10px) saturate(140%); backdrop-filter:blur(10px) saturate(140%);
+}
+/* Light: kartu putih bersih + border lembut */
+[data-theme="light"] .section,
+[data-theme="light"] .card,
+[data-theme="light"] .intro-box,
+[data-theme="light"] .skill-group{
+  background:#FFFFFF;
+  border:1px solid rgba(15,23,42,.08);
+}
 
-    .project p {
-      color: var(--muted);
-    }
+.sec-head{ display:flex; align-items:center; gap:10px; margin:0 0 16px }
+.sec-icon{ width:18px; height:18px; color:var(--accent) }
+.sec-title{ margin:0; font-size:18px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted) }
+.sub-title{ margin:10px 0 10px; font-size:16px; font-weight:800; background:linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
 
-    .contact {
-      text-align: center;
-    }
+/* ========== ABOUT CONTENT (2 COLS) ========== */
+.about-me-inner{ display:grid; gap:28px; grid-template-columns: 1fr }
+@media (min-width: 980px){ .about-me-inner{ grid-template-columns: 1.05fr 1.6fr; align-items:start } }
 
-    .contact p {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      color: var(--muted);
-    }
+.skills-col{ position:relative }
+@media (min-width: 980px){ .skills-col{ position:sticky; top:88px } }
 
-    .contact a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+.skill-group{ border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03); border-radius:14px; padding:14px; margin-bottom:12px }
+.group-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; font-weight:800 }
+.meter-list{ list-style:none; padding:0; margin:0 0 10px; display:grid; gap:10px }
+.meter-list li{ display:grid; gap:6px }
+.meter-list li > span{ font-size:13px; color:var(--text) }
+.meter{ height:9px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden; border:1px solid rgba(255,255,255,.10) }
+.meter > span{ display:block; height:100%; background:linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow:inset 0 0 12px rgba(0,0,0,.22); border-radius:inherit; transition:width .8s var(--anim-ease) }
+.chip-list{ display:flex; flex-wrap:wrap; gap:8px }
+.chip{ font-size:12px; padding:6px 10px; border:1px solid rgba(255,255,255,.12); border-radius:999px; background:rgba(255,255,255,.04); color:var(--muted) }
 
-    .contact a:hover {
-      color: var(--primary);
-    }
+.desc-col .intro-box{ border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03); border-radius:14px; padding:16px }
+.desc-col p{ color:var(--muted); line-height:1.7; margin:0 0 10px }
 
-    footer {
-      background: #1e293b;
-      color: var(--muted);
-      text-align: center;
-      padding: 1.5rem;
-      border-top: 1px solid #2d3b4e;
-      margin-top: 2rem;
-    }
+/* ========== STATS ========== */
+.stats{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px; margin:14px 0 }
+.stat{ text-align:center; padding:14px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03); transition:transform .18s ease, box-shadow .18s ease }
+.stat:hover{ transform:translateY(-3px); box-shadow:0 18px 36px rgba(0,0,0,.35) }
+.stat strong{ display:block; font-size:20px }
+.stat span{ font-size:12px; color:var(--muted) }
 
-    /* animasi scroll */
-    .fade {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease-out;
-    }
+/* ========== TIMELINE ========== */
+.timeline{ position:relative; margin-top:8px; padding-left:10px }
+.timeline::before{ content:""; position:absolute; left:14px; top:0; bottom:0; width:2px; background:linear-gradient(var(--accent), var(--accent-2)) }
+.ti{ position:relative; margin-left:28px; padding:12px 14px; border-radius:14px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.10); transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease }
+.ti + .ti{ margin-top:12px }
+.ti::before{ content:""; position:absolute; left:-18px; top:16px; width:10px; height:10px; border-radius:999px; background:var(--accent-2); box-shadow:0 0 0 3px rgba(37,99,235,.25) }
+.ti:hover{ transform:translateY(-2px); border-color:rgba(255,255,255,.18); box-shadow:0 18px 34px rgba(0,0,0,.28) }
+.ti h4{ margin:0 0 6px; font-size:15px; font-weight:800 }
+.ti small{ color:var(--muted) }
 
-    .fade.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* ========== GRID / CARDS ========== */
+.grid{ display:grid; gap:14px }
+@media (min-width: 900px){ .grid{ grid-template-columns: repeat(3, minmax(0,1fr)) } }
+.card{
+  border:1px solid rgba(255,255,255,.10); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border-radius:16px; padding:14px; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; transform-style:preserve-3d;
+}
+.card:hover{ transform:translateY(-6px) rotateX(2deg); box-shadow:0 22px 42px rgba(0,0,0,.35); border-color:rgba(255,255,255,.18) }
+.card h4{ margin:6px 0 6px; font-size:16px; font-weight:800 }
+.meta{ display:flex; flex-wrap:wrap; gap:6px; margin-top:4px }
+.tag{ font-size:11px; padding:5px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.12); color:var(--muted); background:rgba(255,255,255,.04) }
 
-    @media (max-width: 700px) {
-      header h1 { font-size: 2.2rem; }
-      section { padding: 3rem 1rem; }
-    }
+/* ========== CONTACT / FOOTER ========== */
+.footer-cta{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:12px }
+footer{ margin: clamp(48px, 6vw, 80px) auto 28px; text-align:center; color:var(--muted) }
+
+/* ========== FLOAT ACTIONS ========== */
+.fab{ position:fixed; right:18px; bottom:18px; display:flex; gap:10px; z-index:50; }
+.fab a{
+  display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:12px;
+  background:linear-gradient(180deg, var(--accent), var(--accent-2)); color:#0b1020; text-decoration:none;
+  box-shadow:0 8px 22px rgba(37,99,235,.35); border:1px solid rgba(255,255,255,.18)
+}
   </style>
 </head>
 <body>
+  <a href="#about" class="skip-link">Lewati ke konten</a>
 
-  <header>
-    <h1>Muhammad Ichsan Fachrezi</h1>
-    <p>Fresh Graduate | IT Support Specialist | IoT Enthusiast</p>
+  <!-- NAVBAR -->
+  <header class="reveal show">
+    <div class="nav">
+      <div class="brand" aria-label="Brand">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2l8 4.5v11L12 22l-8-4.5v-11L12 2z" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.4"/>
+        </svg>
+        <span>Muhammad Ichsan Fachrezi</span>
+      </div>
+<script>
+  (function(){
+    const root = document.documentElement;
+    const header = document.querySelector('header');
+    function setNavHeight(){
+      const h = header.getBoundingClientRect().height || 64;
+      root.style.setProperty('--nav-h', h + 'px');
+    }
+    window.addEventListener('load', setNavHeight);
+    window.addEventListener('resize', setNavHeight);
+    // kalau font Google selesai dimuat, update lagi (tinggi bisa berubah)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(setNavHeight);
+    }
+  })();
+</script>
+
+      <nav class="nav-detail" aria-label="Navigasi utama">
+        <a href="#about" aria-current="page">Tentang</a>
+        <a href="#projects">Proyek</a>
+        <a href="#contact">Kontak</a>
+      </nav>
+
+      <div class="toolbar">
+        <!-- Dropdown warna aksen -->
+        <div class="color-dd" id="accentDropdown" aria-haspopup="listbox" aria-expanded="false">
+          <button class="dd-btn" id="accentBtn" aria-label="Ganti warna aksen">
+            <span class="dd-chip" aria-hidden="true"></span>
+            <span id="accentLabel">Blue</span>
+            <span class="dd-caret">▾</span>
+          </button>
+          <div class="dd-pop" role="listbox" aria-label="Pilih warna aksen">
+            <div class="dd-title">Warna aksen</div>
+            <button class="dd-opt" role="option" data-color="blue" aria-selected="true">
+              <span class="dd-left"><span class="dd-dot blue"></span><span class="dd-name">Blue</span></span>
+              <span class="dd-tag">Default</span><span class="dd-check">✓</span>
+            </button>
+            <button class="dd-opt" role="option" data-color="purple" aria-selected="false">
+              <span class="dd-left"><span class="dd-dot purple"></span><span class="dd-name">Purple</span></span>
+              <span class="dd-tag">Vibrant</span><span class="dd-check" aria-hidden="true"> </span>
+            </button>
+            <button class="dd-opt" role="option" data-color="green" aria-selected="false">
+              <span class="dd-left"><span class="dd-dot green"></span><span class="dd-name">Green</span></span>
+              <span class="dd-tag">Fresh</span><span class="dd-check" aria-hidden="true"> </span>
+            </button>
+            <button class="dd-opt" role="option" data-color="orange" aria-selected="false">
+              <span class="dd-left"><span class="dd-dot orange"></span><span class="dd-name">Orange</span></span>
+              <span class="dd-tag">Warm</span><span class="dd-check" aria-hidden="true"> </span>
+            </button>
+            <button class="dd-opt" role="option" data-color="pink" aria-selected="false">
+              <span class="dd-left"><span class="dd-dot pink"></span><span class="dd-name">Pink</span></span>
+              <span class="dd-tag">Playful</span><span class="dd-check" aria-hidden="true"> </span>
+            </button>
+          </div>
+        </div>
+
+        <button class="theme-toggle" id="toggleTheme" aria-label="Ganti tema">🌗 Tema</button>
+      </div>
+    </div>
   </header>
 
-  <nav>
-    <a href="#about">Tentang</a>
-    <a href="#skills">Keahlian</a>
-    <a href="#projects">Proyek</a>
-    <a href="#contact">Kontak</a>
-  </nav>
+  <!-- HERO -->
+  <main class="container">
+    <section id="about" class="about-full reveal" aria-labelledby="about-title">
+      <div class="about-inner reveal-stagger">
+        <div class="avatar-wrap">
+          <div class="avatar-aura" aria-hidden="true"></div>
+          <div class="avatar-frame">
+            <!-- FOTO: fallback aman -->
+            <img
+              src="image/PASSFOTO21.png"
+              alt="Foto Muhammad Ichsan"
+              width="520" height="650"
+              loading="lazy" decoding="async"
+              onerror="this.onerror=null; this.src='image/PASSFOTO21.jpg';"
+            >
+          </div>
+        </div>
 
-  <section id="about" class="about fade">
-    <h2>Tentang Saya</h2>
-    <img src="foto\download.jpeg" alt="Foto Ichsan" />
-    <p>
-    Saya Fresh Graduate Jurusan Teknologi Informasi dari Darma Persada Universitas jurusan Teknologi Informasi, 
-    saya memiliki pengalaman sebagai IT Support dan Engineering Technician. Saya dapat bekerjasama dengan tim maupun individu, 
-    saya dapat beradaptasi dalam suatu lingkungan, open minded, dan saya suka untuk mencoba sesuatu hal baru. 
-    Saya termotivasi untuk selalu mengembangkan kemampuan saya secara profesional.
-    </p>
-  </section>
+        <div class="about-copy">
+          <h1 id="about-title">Perkenalan</h1>
+          <div class="lead">
+            Halo, saya<br>
+            <span class="name">Muhammad Ichsan Fachrezi</span>
+          </div>
 
-  <section id="skills" class="fade">
-    <h2>Keahlian</h2>
-    <div class="skills">
-      <div class="skill">
-        <h3>Frontend</h3>
-        <p>HTML, CSS, JavaScript, Responsive Design</p>
-      </div>
-      <div class="skill">
-        <h3>Backend</h3>
-        <p>PHP, Python, MySQL</p>
-      </div>
-      <div class="skill">
-        <h3>IoT & Hardware</h3>
-        <p>ESP32, Blynk, Adruino IDE</p>
-      </div>
-      <div class="skill">
-        <h3>Networking</h3>
-        <p>Mikrotik, LAN/WAN Setup, IP Configuration & Subnetting</p>
-      </div>
-      <div class="skill">
-        <h3>IT Support</h3>
-        <p>Instalasi OS, Maintenance, Troubleshooting, IT Asset Management</p>
-      </div>
-    </div>
-  </section>
+          <div class="about-divider" role="presentation"></div>
 
-  <section id="projects" class="fade">
-    <h2>Project</h2>
-    <div class="projects">
-      <div class="project">
-        <h3>IoT Sistem Hidroponik</h3>
-        <p>Sistem monitoring air menggunakan ESP32 dan Blynk untuk memantau pH, TDS, dan suhu secara real-time.</p>
-      </div>
-      <div class="project">
-        <h3>Game Development</h3>
-        <p>Desain responsif dan interaktif menggunakan HTML, CSS, dan animasi halus untuk tampilan profesional.</p>
-      </div>
-      <div class="project">
-        <h3>IoT Pintu RFID</h3>
-        <p>Aplikasi kasir berbasis Tkinter & SQLite untuk manajemen transaksi toko kecil.</p>
-      </div>
-    </div>
-  </section>
+          <div class="badges" aria-label="Keahlian utama">
+            <span class="pill">HTML / CSS / JavaScript</span>
+            <span class="pill">PHP &amp; MySQL</span>
+            <span class="pill">Jaringan Dasar</span>
+            <span class="pill">IoT (ESP32 / Arduino)</span>
+          </div>
 
-  <section id="contact" class="contact fade">
-    <h2>Kontak</h2>
-    <p>📧 Email: <a href="mailto:ichsanfahrezi5@gmail.com">ichsanfahrezi5@gmail.com</a></p>
-    <p>📱 WhatsApp: <a href="https://wa.me/6281380338647" target="_blank">+62 813 8033 8647</a></p>
-    <p>💼 Linkedin: <a href="https://www.linkedin.com/in/muhammad-ichsan-fachrezi-5b3812225/" target="_blank">Muhammad Ichsan Fachrezi</a></p>
-  </section>
+          <div class="cta">
+            <a class="btn" href="#projects">Lihat Proyek</a>
+            <a class="btn-ghost" href="mailto:ichsanfahrezi5@gmail.com" aria-label="Email Muhammad Ichsan">Email</a>
+            <a class="btn-ghost" href="tel:+6281380338647" aria-label="Telepon Muhammad Ichsan">Telepon</a>
+            <a class="btn-ghost" href="https://www.linkedin.com/in/muhammad-ichsan-fachrezi-5b3812225" aria-label="LinkedIn Muhammad Ichsan F">LinkedIn</a>
+          </div>
 
-  <footer>
-    © 2025 Ichsan F 
-  </footer>
+          <div class="badges" style="margin-top:10px" aria-label="Info singkat">
+            <span class="pill">Jakarta, Indonesia</span>
+            <span class="pill">0813-8033-8647</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-cue" aria-hidden="true">
+        Gulir ke bawah
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </section>
+
+    <!-- ABOUT ME -->
+    <section class="section reveal" aria-labelledby="about-me-title">
+      <div class="sec-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="12" cy="12" r="2.6" stroke="currentColor" stroke-width="1.4"/>
+        </svg>
+        <h2 id="about-me-title" class="sec-title">Tentang Saya</h2>
+      </div>
+
+      <div class="about-me-inner">
+        <!-- LEFT: SKILLS -->
+        <aside class="skills-col reveal-stagger" aria-label="Keahlian Saya">
+          <div class="skill-group">
+            <div class="group-head"><span>Web Development</span></div>
+            <ul class="meter-list">
+              <li>
+                <span id="skill-html">HTML / CSS / JS</span>
+                <div class="meter" role="meter" aria-labelledby="skill-html" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85">
+                  <span style="width:85%"></span>
+                </div>
+              </li>
+              <li>
+                <span id="skill-php">PHP &amp; MySQL</span>
+                <div class="meter" role="meter" aria-labelledby="skill-php" aria-valuemin="0" aria-valuemax="100" aria-valuenow="78">
+                  <span style="width:78%"></span>
+                </div>
+              </li>
+              <li>
+                <span id="skill-responsive">Desain Responsif</span>
+                <div class="meter" role="meter" aria-labelledby="skill-responsive" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+                  <span style="width:80%"></span>
+                </div>
+              </li>
+            </ul>
+            <div class="chip-list">
+              <span class="chip">Git</span><span class="chip">VS Code</span><span class="chip">Google Sites</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="group-head"><span>IT &amp; Networking</span></div>
+            <ul class="meter-list">
+              <li>
+                <span id="skill-trouble">Troubleshooting HW/SW</span>
+                <div class="meter" role="meter" aria-labelledby="skill-trouble" aria-valuemin="0" aria-valuemax="100" aria-valuenow="82">
+                  <span style="width:82%"></span>
+                </div>
+              </li>
+              <li>
+                <span id="skill-net">Konfigurasi IP/DHCP/DNS</span>
+                <div class="meter" role="meter" aria-labelledby="skill-net" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75">
+                  <span style="width:75%"></span>
+                </div>
+              </li>
+              <li>
+                <span id="skill-office">Microsoft Office</span>
+                <div class="meter" role="meter" aria-labelledby="skill-office" aria-valuemin="0" aria-valuemax="100" aria-valuenow="86">
+                  <span style="width:86%"></span>
+                </div>
+              </li>
+            </ul>
+            <div class="chip-list">
+              <span class="chip">Router/Switch/AP</span><span class="chip">Helpdesk</span><span class="chip">Backup &amp; Security</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="group-head"><span>IoT</span></div>
+            <ul class="meter-list">
+              <li>
+                <span id="skill-esp">ESP32 &amp; Arduino IDE</span>
+                <div class="meter" role="meter" aria-labelledby="skill-esp" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70">
+                  <span style="width:70%"></span>
+                </div>
+              </li>
+              <li>
+                <span>Sensor PIR/DHT, Relay, Servo</span>
+                <div class="meter"><span style="width:68%"></span></div>
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <!-- RIGHT: INTRO + TIMELINE + CERTS -->
+        <div class="desc-col reveal-stagger">
+          <div class="intro-box">
+            <p>
+              Fresh graduate <strong>Teknologi Informasi</strong> (UNSADA, IPK 3.23) dengan pengalaman sebagai
+              <strong>IT Support</strong>. Terbiasa dalam IoT,
+              mengelola jaringan dasar, dan menyelesaikan problem teknis harian.
+            </p>
+            <p>
+              Adaptif, komunikatif, dan senang belajar hal baru—siap berkontribusi di lingkungan IT yang dinamis.
+            </p>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><strong>S1 TI</strong><span>UNSADA (IPK 3.23)</span></div>
+            <div class="stat"><strong>Freelance</strong><span>Jan 2025 – kini</span></div>
+            <div class="stat"><strong>1+ th</strong><span>Pengalaman terkait</span></div>
+          </div>
+
+          <h3 class="sub-title">Pengalaman</h3>
+          <div class="timeline masonry">
+            <article class="ti">
+              <h4>Klinik Tiara Medika — Admin Acreditasi</h4>
+              <small>Mei 2025 – Jun 2025 · Jakarta Timur</small>
+              <p style="margin:6px 0 0; color:var(--muted)">
+                 Memeriksa kelengkapan dokumen pendukung akreditasi, Mengevaluasi dan mereview Surat Keputusan (SK), Menyusun dokumen akreditasi secara sistematis dan sesuai format yang ditentukan, komunikasi klien,
+                 Berkoordinasi dengan tim administrasi dan unit terkait untuk validasi serta finalisasi data.
+              </p>
+            </article>
+            <article class="ti">
+              <h4> ANDALAN AUTO PRIMA — IT Support</h4>
+              <small>Mar 2023 – Jul 2023 · Jakarta</small>
+              <p style="margin:6px 0 0; color:var(--muted)">
+                 Instalasi, Konfigurasi, dan Pemeliharaan Sistem,  Penerapan, Pengelolaan, dan Optimasi Perangkat Lunak, Pengelolaan Perangkat Jaringan Pengelolaan Aset dan Inventaris IT, laporan teknis.
+              </p>
+            </article>
+            <article class="ti">
+              <h4> MARRIOT EXECUTIVE APARTMENTS THE MAYFLOWERS — Engineering Technician Intern</h4>
+              <small>Jan 2023 – Jun 2023 · Jakarta</small>
+              <p style="margin:6px 0 0; color:var(--muted)">
+                Perhitungan Konsumsi Daya Listrik (kWh), Pemecahan Masalah dan Perbaikan Motor Listrik,  Melakukan Perbaikan Infrastruktur dan Peralatan Ruangan,  Perbaikan Panel Listrik.
+              </p>
+            </article>
+          </div>
+
+          <h3 class="sub-title" style="margin-top:16px">Sertifikat</h3>
+          <div class="grid" role="list">
+            <div class="card" role="listitem">
+              <h4> Instalasi Penerangan 3 Fasa —  Badan Nasional Sertifikasi Profesi (BNSP)</h4>
+              <p style="color:var(--muted); margin:6px 0 0">Mar 2018</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4> IT Essentials: PC Hardware and Software — Cisco</h4>
+              <p style="color:var(--muted); margin:6px 0 0">Mar 2021</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4>CCNAv7: Introduction to Networks — Cisco</h4>
+              <p style="color:var(--muted); margin:6px 0 0">Feb 2023</p>
+            </div>
+            <div class="card" role="listitem">
+              <h4>Game Development — Infinite Learning Indonesia</h4>
+              <p style="color:var(--muted); margin:6px 0 0">Agu–Jan 2024</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section reveal" aria-labelledby="projects-title">
+      <div class="sec-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M4 10h16M9 6v12" stroke="currentColor" stroke-width="1.4"/>
+        </svg>
+        <h2 id="projects-title" class="sec-title">Proyek Terpilih</h2>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="meta">
+            <span class="tag">IoT</span><span class="tag">Esp32</span>
+          </div>
+          <h4>Sistem Monitoring dan Kontrol Nutrisi Tanaman</h4>
+          <p style="color:var(--muted); margin:6px 0 0">
+             Mengembangkan sistem berbasis IoT untuk memantau dan mengontrol nutrisi tanaman hidroponik.
+          </p>
+        </article>
+        <article class="card">
+          <div class="meta">
+            <span class="tag">C#</span><span class="tag">GameDev</span>
+          </div>
+          <h4> Studi Independen – Game Development</h4>
+          <p style="color:var(--muted); margin:6px 0 0">
+             Mengembangkan proyek game berjudul Nusantara Savior.
+          </p>
+        </article>
+        <article class="card">
+          <div class="meta">
+            <span class="tag">IoT</span><span class="tag">RFID</span>
+          </div>
+          <h4>Sistem keamanan berbasis RFID</h4>
+          <p style="color:var(--muted); margin:6px 0 0">
+            Sistem keamanan berbasis RFID + NodeMCU; dengan integrasi Telegram.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section reveal" aria-labelledby="contact-title">
+      <div class="sec-head">
+        <svg class="sec-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 5h18v14H3z" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.4"/>
+        </svg>
+        <h2 id="contact-title" class="sec-title">Kontak</h2>
+      </div>
+      <p style="color:var(--muted)">
+        Terbuka untuk kesempatan <strong>IT Support</strong> & <strong>IT Infra</strong> (full-time/part-time/freelance).
+      </p>
+      <div class="footer-cta">
+        <a class="btn" href="mailto:ichsanfahrezi5@gmail.com" aria-label="Kirim email">ichsanfahrezi5@gmail.com</a>
+        <a class="btn-ghost" href="tel:+6281380338647" aria-label="Telepon">0813-8033-8647</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Muhammad Ichsan F • Jakarta, Indonesia</footer>
+
+  <!-- FLOAT ACTIONS -->
+  <div class="fab" aria-hidden="true">
+    <a href="#about" title="Kembali ke atas">↑</a>
+  </div>
 
   <script>
-    const fades = document.querySelectorAll('.fade');
-    window.addEventListener('scroll', () => {
-      fades.forEach(el => {
-        const rect = el.getBoundingClientRect().top;
-        if (rect < window.innerHeight - 100) el.classList.add('show');
+  // ===== Reveal on Scroll =====
+  (function(){
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const addShow = el => el.classList.add('show');
+    if (prefersReduced) {
+      document.querySelectorAll('.reveal,.reveal-stagger').forEach(addShow);
+    } else {
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            addShow(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { root:null, threshold:0.12, rootMargin:'80px 0px' });
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach(el=>io.observe(el));
+    }
+  })();
+
+  // ===== Theme Toggle (Auto/Light/Dark + meta theme-color sinkron) =====
+  (function(){
+    const root = document.documentElement;
+    const btn = document.getElementById('toggleTheme');
+    const meta = document.getElementById('themeColorMeta');
+    const KEY = 'theme-preference';
+    const mq = window.matchMedia('(prefers-color-scheme: light)');
+
+    const getPref = () => localStorage.getItem(KEY) || 'auto';
+    const setMeta = () => meta && meta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim());
+
+    function apply(val){
+      root.setAttribute('data-theme', val);
+      btn.setAttribute('aria-label', 'Ganti tema (saat ini: ' + val + ')');
+      setMeta();
+    }
+
+    // init
+    apply(getPref());
+
+    // toggle siklus: dark -> light -> auto -> dark
+    btn.addEventListener('click', ()=>{
+      const cur = getPref();
+      const next = cur === 'dark' ? 'light' : cur === 'light' ? 'auto' : 'dark';
+      localStorage.setItem(KEY, next);
+      apply(next);
+    });
+
+    // kalau 'auto', dan user ganti tema OS, update tanpa reload
+    mq.addEventListener?.('change', ()=>{
+      if (getPref() === 'auto') apply('auto');
+    });
+  })();
+
+  // ===== Active nav on scroll =====
+  (function(){
+    const sections = ['about','projects','contact'].map(id => document.getElementById(id));
+    const anchors = Array.from(document.querySelectorAll('.nav-detail a'));
+    const setActive = (id) => {
+      anchors.forEach(a => a.removeAttribute('aria-current'));
+      const el = anchors.find(a => a.getAttribute('href') === '#' + id);
+      if (el) el.setAttribute('aria-current','page');
+    };
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+    }, { root:null, threshold:0.5 });
+    sections.forEach(s => io.observe(s));
+  })();
+
+  // ===== Accent color dropdown (persist + ARIA) =====
+  (function(){
+    const KEY = 'accent-color';
+    const root = document.documentElement;
+    const meta = document.getElementById('themeColorMeta');
+    const dd = document.getElementById('accentDropdown');
+    const btn = document.getElementById('accentBtn');
+    const label = document.getElementById('accentLabel');
+    const opts = Array.from(dd.querySelectorAll('.dd-opt'));
+
+    function setMetaTheme(){ meta && meta.setAttribute('content', getComputedStyle(root).getPropertyValue('--bg').trim()); }
+
+    function apply(color){
+      root.setAttribute('data-color', color);
+      localStorage.setItem(KEY, color);
+      label.textContent = color.charAt(0).toUpperCase() + color.slice(1);
+      opts.forEach(o=>{
+        const yes = o.dataset.color === color;
+        o.setAttribute('aria-selected', yes ? 'true' : 'false');
+        o.querySelector('.dd-check').textContent = yes ? '✓' : ' ';
+      });
+      setMetaTheme();
+    }
+
+    // init
+    const saved = localStorage.getItem(KEY) || 'blue';
+    apply(saved);
+
+    // open/close
+    function open(){ dd.setAttribute('aria-expanded','true'); }
+    function close(){ dd.setAttribute('aria-expanded','false'); }
+    btn.addEventListener('click', (e)=>{ e.stopPropagation(); dd.getAttribute('aria-expanded')==='true'?close():open(); });
+    document.addEventListener('click', (e)=>{ if(!dd.contains(e.target)) close(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+
+    // choose option
+    opts.forEach((o,i)=>{
+      o.addEventListener('click', ()=>{
+        apply(o.dataset.color);
+        close(); btn.focus();
+      });
+      // keyboard navigation
+      o.addEventListener('keydown', (e)=>{
+        if(e.key==='ArrowDown'){ e.preventDefault(); (opts[i+1]||opts[0]).focus(); }
+        if(e.key==='ArrowUp'){ e.preventDefault(); (opts[i-1]||opts[opts.length-1]).focus(); }
+        if(e.key==='Enter' || e.key===' '){ e.preventDefault(); o.click(); }
       });
     });
+
+    // fokus opsi terpilih saat buka via keyboard
+    btn.addEventListener('keydown', (e)=>{
+      if(e.key==='ArrowDown' || e.key==='Enter' || e.key===' '){
+        e.preventDefault(); open(); (opts.find(o=>o.getAttribute('aria-selected')==='true')||opts[0]).focus();
+      }
+    });
+  })();
+
+  // Tahun footer
+  document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
+  <style>
+    /* ===== Desktop Layout Polish (drop-in overrides) ===== */
+@media (min-width: 1140px){
+  :root{
+    --container: 1280px; /* naikin kanvas desktop */
+  }
+
+  /* Navbar & container padding */
+  .nav{ padding-block: 14px; }
+  .container{ padding: 28px 32px; }
+
+  /* HERO: 2 kolom seimbang + avatar lebih besar */
+  .about-inner{
+    grid-template-columns: 360px 1.6fr !important;
+    align-items: center;
+    gap: 36px;
+    text-align: left;
+  }
+  .avatar-wrap{ width:320px; height:400px; margin-inline:0; }
+  .lead{ font-size: 42px; }
+  .name{ font-size: 66px; }
+  .badges{ justify-content:flex-start; }
+  .cta{ justify-content:flex-start; gap:12px; }
+  .about-full{ min-height: 640px; }
+
+  /* Section wrapper: napas lebih lega di desktop */
+  .section{
+    padding: 44px 48px;
+    margin-top: 88px;
+  }
+
+  /* ABOUT ME: kolom kiri-kanan lebih proporsional */
+  .about-me-inner{
+    grid-template-columns: 0.95fr 1.55fr !important;
+    gap: 32px;
+  }
+  .skills-col{ position: sticky; top: 96px; }
+  .skill-group{ padding:16px; }
+  .meter{ height:10px; }
+
+  /* Timeline: lebar konten nyaman, tidak full-bleed */
+  .timeline{ max-width: 820px; }
+  .ti{ padding: 14px 16px; }
+
+  /* Grid proyek: 3 kolom + tinggi kartu seragam */
+  .grid{
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+    grid-auto-rows: 1fr;     /* semua baris seragam */
+    gap: 16px;
+  }
+  .card{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card h4{ margin-top: 8px; }
+  .card .meta{ margin-top: 0; }
+
+  /* Stats lebih tegas */
+  .stats{ gap: 14px; }
+  .stat{ padding: 16px; }
+
+  /* Footer jarak akhir */
+  footer{ margin-top: 80px; }
+}
+
+/* Layar ekstra lebar: avatar tidak kebesaran, grid 4 kolom */
+@media (min-width: 1440px){
+  .avatar-wrap{ width:340px; height:428px; }
+  #projects .grid{ grid-template-columns: repeat(4, minmax(0,1fr)); }
+}
+
+/* Layar 900–1139px: tetap rapi 2 kolom, tapi compact */
+@media (min-width: 900px) and (max-width: 1139px){
+  .about-inner{
+    grid-template-columns: 300px 1fr !important;
+    gap: 24px;
+  }
+  .avatar-wrap{ width:280px; height:340px; }
+  .lead{ font-size: 36px; }
+  .name{ font-size: 56px; }
+  .about-me-inner{
+    grid-template-columns: 1fr 1.4fr !important;
+    gap: 24px;
+  }
+  .grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+
+/* Kartu putih & navbar terang saat Light (konsisten) */
+[data-theme="light"] .section,
+[data-theme="light"] .card,
+[data-theme="light"] .intro-box,
+[data-theme="light"] .skill-group{
+  background:#FFFFFF;
+  border:1px solid rgba(15,23,42,.08);
+}
+[data-theme="light"] header{
+  background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.70));
+}
+
+
+  </style>
 </body>
 </html>
